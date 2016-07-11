@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+coverage
+# Exclude compiled files
+lib
+build
+
+# OS files
+.DS_STORE
