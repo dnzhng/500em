@@ -16,7 +16,7 @@ class Home extends React.Component {
     this.getData(this.state.page);
   }
 
-  handleScroll = (e) => {
+  handleScroll = () => {
     let maxHeight = document.body.clientHeight;
     let innerHeight = window.innerHeight;
     let scrollPosition= window.scrollY;
@@ -27,7 +27,6 @@ class Home extends React.Component {
         this.setState({
           loading: true
         });
-        console.log("sldfksdlfksdlfkd");
         this.getData(this.state.page);
       }
     }
