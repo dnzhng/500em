@@ -1,9 +1,10 @@
-//Vendor
-
-
-//Modules, Variables and Utilities
-
 body {
-  background-color: white;
+  background-color: $background;
+  font-family: "LatoWeb";
+  margin: 0;
 }
-//Partials
+
+.content {
+  margin: 0 10%;
+  padding-top: 100px;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
-import './assets/scss/main.scss';
+import './assets/scss/app.scss';
 
 import Routes from './routes/'
 
