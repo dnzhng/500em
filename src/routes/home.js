@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tile } from '../components/tiles/';
 
 class Home extends React.Component {
 
@@ -33,8 +34,14 @@ class Home extends React.Component {
 
   }
 
+  renderTiles = () => {
+    return this.state.data.map((photo) => {
+      return <Tile image={photo.image_url} />
+    })
+  }
+
   getData = (page) => {
-    fetch(`https://api.500px.com/v1/photos?feature=popular&page=${page}&consumer_key=g34gnWJqKAIyYcrgOIFOjrGJB5XTm2Z9sxoElJbQ`).then((response) => {
+    fetch(`https://api.500px.com/v1/photos?feature=popular&page=${page}&image_size=4&sort=created_at&consumer_key=g34gnWJqKAIyYcrgOIFOjrGJB5XTm2Z9sxoElJbQ`).then((response) => {
       return response.json();
     }).then((data) => {
       this.setState({
@@ -48,7 +55,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home">
-        {JSON.stringify(this.state.data)}
+        {this.renderTiles()}
       </div>
     )
   }
