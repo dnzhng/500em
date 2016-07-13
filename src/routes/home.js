@@ -36,12 +36,15 @@ class Home extends React.Component {
 
   renderTiles = () => {
     return this.state.data.map((photo) => {
-      return <Tile image={photo.image_url} />
+      return <Tile key={photo.id}
+                  image={photo.image_url}
+                  name={photo.name}
+                  views={photo.times_viewed} />
     })
   }
 
   getData = (page) => {
-    fetch(`https://api.500px.com/v1/photos?feature=popular&page=${page}&image_size=4&sort=created_at&consumer_key=g34gnWJqKAIyYcrgOIFOjrGJB5XTm2Z9sxoElJbQ`).then((response) => {
+    fetch(`https://api.500px.com/v1/photos?feature=popular&page=${page}&image_size=4&consumer_key=g34gnWJqKAIyYcrgOIFOjrGJB5XTm2Z9sxoElJbQ`).then((response) => {
       return response.json();
     }).then((data) => {
       this.setState({
@@ -54,7 +57,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home">
+      <div className="home tiles">
         {this.renderTiles()}
       </div>
     )

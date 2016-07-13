@@ -1,0 +1,68 @@
+.tiles {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.tile {
+  width: 300px;
+  height: 400px;
+  background-color: $white;
+  margin-bottom: 10px;
+  @include boxShadow(0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24));
+  @include transition(all, 0.3s, cubic-bezier(.25, .8, .25, 1));
+
+  &:hover {
+    @include boxShadow(0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22));
+
+    .tile-data {
+      @include transition(all, 0.1s, ease-out);
+      height: 50px;
+      opacity: 1;
+    }
+  }
+}
+
+.tile-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    max-width: 100%;
+    max-height: 400px;
+    height: auto;
+  }
+}
+
+.tile-data {
+  position: absolute;
+  height: 0px;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: $white;
+  background-color: rgba(0,0,0,0.5);
+  opacity: 0;
+  @include transition(all, 0.1s, ease-out);
+
+  span {
+    margin-right: 15px;
+  }
+}
+
+.tile-title {
+  position: relative;
+  display: flex;
+  width: inherit;
+  bottom: 50px;
+  height: 50px;
+  align-items: center;
+  color: $white;
+  background-color: rgba(0,0,0,0.5);
+  span {
+    margin-left: 15px;
+  }
+}

@@ -7,6 +7,14 @@ class Tile extends React.Component {
 
   static propTypes = {
     /**
+     * Name of the image to display
+     */
+    name: React.PropTypes.string.isRequired,
+    /**
+     * Number of views that the image has
+     */
+    views: React.PropTypes.number.isRequired,
+    /**
      * Image url to display
      */
     image: React.PropTypes.string.isRequired,
@@ -25,7 +33,20 @@ class Tile extends React.Component {
     let clazz = classNames('tile', this.props.className);
     return (
       <div className={clazz}>
-        <img src={this.props.image} />
+        <div className="tile-data">
+          <span>
+            {this.props.views} views
+          </span>
+        </div>
+        <div className="tile-image">
+          <img src={this.props.image} />
+
+        </div>
+        <div className="tile-title">
+          <span>
+            {this.props.name}
+          </span>
+        </div>
       </div>
     )
   }
