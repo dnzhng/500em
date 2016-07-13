@@ -19,6 +19,10 @@ class Tile extends React.Component {
      */
     image: React.PropTypes.string.isRequired,
     /**
+     * Function for parent to properly handle likes
+     */
+    likeHandler: React.PropTypes.func.isRequired,
+    /**
      * Optional extra classes passed in
      */
     className: React.PropTypes.string,
