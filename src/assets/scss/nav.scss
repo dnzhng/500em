@@ -38,5 +38,10 @@
 
 .nav-item {
   text-decoration: none;
+  color: $font-secondary;
   margin-right: 15px;
+}
+
+.likes {
+  color: $font-main;
 }

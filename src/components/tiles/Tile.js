@@ -28,14 +28,36 @@ class Tile extends React.Component {
     children: React.PropTypes.node
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      liked: false
+    }
+  }
+
+  toggleLike = () => {
+    let like = !this.state.liked;
+    this.setState({
+      liked: like
+    })
+
+    this.props.likeHandler(like);
+  }
+
   render() {
 
-    let clazz = classNames('tile', this.props.className);
+    let clazz = classNames('tile', this.props.className, {
+      "liked" : this.state.liked
+    });
+
     return (
       <div className={clazz}>
         <div className="tile-data">
           <span>
             {this.props.views} views
+          </span>
+          <span className="likeButton">
+            <i className="fa fa-heart-o" aria-hidden="true" onClick={this.toggleLike}></i>
           </span>
         </div>
         <div className="tile-image">

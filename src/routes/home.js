@@ -1,6 +1,8 @@
 import React from 'react';
+import { Nav, NavRight, NavLeft, NavItem } from '../components/nav';
+import { Logo } from '../components/logo';
 import { Tile } from '../components/tiles/';
-
+import classNames from 'classnames'
 class Home extends React.Component {
 
   constructor(props) {
@@ -8,7 +10,8 @@ class Home extends React.Component {
     this.state = {
       data : [],
       page: 1,
-      loading: false
+      loading: false,
+      liked: 0
     }
   }
 
@@ -34,12 +37,26 @@ class Home extends React.Component {
 
   }
 
+  likeHandler = (like) => {
+    if (like) {
+      this.setState({
+        liked : this.state.liked + 1
+      })
+    } else {
+      this.setState({
+        liked : this.state.liked - 1
+      })
+
+    }
+  }
+
   renderTiles = () => {
     return this.state.data.map((photo) => {
       return <Tile key={photo.id}
                   image={photo.image_url}
                   name={photo.name}
-                  views={photo.times_viewed} />
+                  views={photo.times_viewed}
+                  likeHandler={this.likeHandler}/>
     })
   }
 
@@ -56,9 +73,24 @@ class Home extends React.Component {
   }
 
   render() {
+    let hasLikes = classNames({
+      "likes" : this.state.liked
+    })
     return (
-      <div className="home tiles">
-        {this.renderTiles()}
+      <div>
+        <Nav height={80}>
+          <NavLeft>
+            <NavItem href="/"><Logo/></NavItem>
+          </NavLeft>
+          <NavRight>
+            <NavItem href="liked" className={hasLikes}>{this.state.liked} Liked</NavItem>
+          </NavRight>
+        </Nav>
+        <div className="content">
+          <div className="home tiles">
+            {this.renderTiles()}
+          </div>
+        </div>
       </div>
     )
   }

@@ -16,7 +16,7 @@
     @include boxShadow(0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22));
 
     .tile-data {
-      @include transition(all, 0.1s, ease-out);
+      @include transition(height, 0.1s, ease-out);
       height: 50px;
       opacity: 1;
     }
@@ -44,12 +44,16 @@
   align-items: center;
   justify-content: flex-end;
   color: $white;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   opacity: 0;
-  @include transition(all, 0.1s, ease-out);
+  @include transition(height, 0.1s, ease-out);
 
   span {
     margin-right: 15px;
+  }
+
+  i {
+    cursor: pointer;
   }
 }
 
@@ -61,8 +65,16 @@
   height: 50px;
   align-items: center;
   color: $white;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   span {
     margin-left: 15px;
+  }
+}
+
+.liked {
+  background-color: $pink;
+
+  .likeButton {
+    color: $pink;
   }
 }
