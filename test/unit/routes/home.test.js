@@ -39,10 +39,26 @@ describe('<Home />', () => {
   })
 
   it('should increment/decrement likes', () => {
-    expect(home.state().liked).to.equal(0);
-    home.instance().likeHandler(true);
-    expect(home.state().liked).to.equal(1);
-    home.instance().likeHandler(false);
-    expect(home.state().liked).to.equal(0);
+    expect(home.state().liked.length).to.equal(0);
+    home.instance().likeHandler(true, 1);
+    expect(home.state().liked.length).to.equal(1);
+    home.instance().likeHandler(false, 1);
+    expect(home.state().liked.length).to.equal(0);
+  })
+
+  it('should toggle the showLiked state', () => {
+    expect(home.state().showLikes).to.be.falsy;
+    home.instance().showLikes();
+    expect(home.state().showLikes).to.be.truthy;
+    home.instance().showLikes();
+    expect(home.state().showLikes).to.be.falsy;
+  })
+
+  it('should toggle the showNSFW state', () => {
+    expect(home.state().showLikes).to.be.truthy;
+    home.instance().toggleNSFW();
+    expect(home.state().showLikes).to.be.falsy;
+    home.instance().toggleNSFW();
+    expect(home.state().showLikes).to.be.truthy;
   })
 })
