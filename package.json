@@ -8,13 +8,13 @@
     "build": "npm run clean && npm run build:js",
     "clean": "rm -rf build",
     "coverage": "npm run coverage:unit",
-    "coverage:unit": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --require test/helpers/setup.js --bail --recursive test/unit/**/*.test.js -R spec",
+    "coverage:unit": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --require test/helpers/setup.js --bail --recursive test/unit/ -R spec",
     "deploy": "npm run build && npm run gh-pages",
     "eslint": "eslint --config .eslintrc src",
     "gh-pages": "git-directory-deploy --directory build --username 'Dan Zhang'",
     "start": "babel-node src/app.js",
     "test": "npm run test:unit && npm run coverage && npm run eslint",
-    "test:unit": "mocha test/helpers/setup.js test/unit/**/*.test.js"
+    "test:unit": "mocha test/helpers/setup.js --recursive test/unit/"
   },
   "repository": {
     "type": "git",

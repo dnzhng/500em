@@ -3,6 +3,7 @@ import { Nav, NavRight, NavLeft, NavItem } from '../components/nav';
 import { Logo } from '../components/logo';
 import { Tile } from '../components/tiles/';
 import classNames from 'classnames'
+
 class Home extends React.Component {
 
   constructor(props) {
