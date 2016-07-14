@@ -43,6 +43,9 @@ class Tile extends React.Component {
     }
   }
 
+/**
+ * Toggles if the current photo is liked or not
+ */
   toggleLike = () => {
     let like = !this.state.liked;
     this.setState({
