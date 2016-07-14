@@ -40,8 +40,9 @@
   text-decoration: none;
   color: $font-secondary;
   margin-right: 15px;
-}
-
-.likes {
-  color: $font-main;
+  @include transition(color, 0.1s, ease-in-out);
+  &:hover {
+    @include transition(color, 0.1s, ease-in-out);
+    color: $font-main;
+  }
 }

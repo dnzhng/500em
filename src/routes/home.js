@@ -1,9 +1,11 @@
 import React from 'react';
-import classNames from 'classnames'
-import _ from 'underscore'
+import 'whatwg-fetch';
+import classNames from 'classnames';
+import _ from 'underscore';
 import { Nav, NavRight, NavLeft, NavItem } from '../components/nav';
 import { Logo } from '../components/logo';
 import { Tile } from '../components/tiles/';
+
 
 class Home extends React.Component {
 
@@ -14,7 +16,8 @@ class Home extends React.Component {
       page: 1,
       loading: false,
       liked: [],
-      showLikes: false
+      showLikes: false,
+      showNSFW: true
     }
   }
 
@@ -46,6 +49,12 @@ class Home extends React.Component {
     })
   }
 
+  toggleNSFW = () => {
+    this.setState({
+      showNSFW: !this.state.showNSFW
+    })
+  }
+
   likeHandler = (like, id) => {
     let photo = _.findWhere(this.state.data, {id : id})
     if (like) {
@@ -66,6 +75,9 @@ class Home extends React.Component {
       set = this.state.liked;
     }
     return set.map((photo) => {
+      if (!this.state.showNSFW && photo.nsfw) {
+        return;
+      }
       return <Tile key={photo.id}
                   id={photo.id}
                   image={photo.image_url}
@@ -93,7 +105,7 @@ class Home extends React.Component {
     })
 
     let likeCount = this.state.showLikes ? "View all" : `${this.state.liked.length} Liked`;
-
+    let nsfw = this.state.showNSFW ? "Hide NSFW" : "Show NSFW";
     return (
       <div>
         <Nav height={80}>
@@ -101,6 +113,11 @@ class Home extends React.Component {
             <NavItem href="/"><Logo/></NavItem>
           </NavLeft>
           <NavRight>
+            <NavItem href="#">
+              <span onClick={this.toggleNSFW}>
+              {nsfw}
+            </span>
+          </NavItem>
             <NavItem href="#" className={hasLikes}>
               <span onClick={this.showLikes}>
               {likeCount}
