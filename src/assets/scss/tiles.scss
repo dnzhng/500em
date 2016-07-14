@@ -72,9 +72,8 @@
 }
 
 .liked {
-  background-color: $pink;
-
-  .likeButton {
-    color: $pink;
+  .tile-data,
+  .tile-title {
+    background-color: $pink;
   }
 }

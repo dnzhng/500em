@@ -1,8 +1,9 @@
 import React from 'react';
+import classNames from 'classnames'
+import _ from 'underscore'
 import { Nav, NavRight, NavLeft, NavItem } from '../components/nav';
 import { Logo } from '../components/logo';
 import { Tile } from '../components/tiles/';
-import classNames from 'classnames'
 
 class Home extends React.Component {
 
@@ -12,7 +13,8 @@ class Home extends React.Component {
       data : [],
       page: 1,
       loading: false,
-      liked: 0
+      liked: [],
+      showLikes: false
     }
   }
 
@@ -38,22 +40,34 @@ class Home extends React.Component {
 
   }
 
-  likeHandler = (like) => {
+  showLikes = () => {
+    this.setState({
+      showLikes: !this.state.showLikes
+    })
+  }
+
+  likeHandler = (like, id) => {
+    let photo = _.findWhere(this.state.data, {id : id})
     if (like) {
       this.setState({
-        liked : this.state.liked + 1
+        liked: this.state.liked.concat(photo)
       })
     } else {
       this.setState({
-        liked : this.state.liked - 1
+        liked : _.without(this.state.liked, photo)
       })
 
     }
   }
 
   renderTiles = () => {
-    return this.state.data.map((photo) => {
+    let set = this.state.data;
+    if (this.state.showLikes) {
+      set = this.state.liked;
+    }
+    return set.map((photo) => {
       return <Tile key={photo.id}
+                  id={photo.id}
                   image={photo.image_url}
                   name={photo.name}
                   views={photo.times_viewed}
@@ -77,6 +91,9 @@ class Home extends React.Component {
     let hasLikes = classNames({
       "likes" : this.state.liked
     })
+
+    let likeCount = this.state.showLikes ? "View all" : `${this.state.liked.length} Liked`;
+
     return (
       <div>
         <Nav height={80}>
@@ -84,7 +101,11 @@ class Home extends React.Component {
             <NavItem href="/"><Logo/></NavItem>
           </NavLeft>
           <NavRight>
-            <NavItem href="liked" className={hasLikes}>{this.state.liked} Liked</NavItem>
+            <NavItem href="#" className={hasLikes}>
+              <span onClick={this.showLikes}>
+              {likeCount}
+            </span>
+          </NavItem>
           </NavRight>
         </Nav>
         <div className="content">

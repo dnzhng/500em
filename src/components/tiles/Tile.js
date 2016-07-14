@@ -15,6 +15,10 @@ class Tile extends React.Component {
      */
     views: React.PropTypes.number.isRequired,
     /**
+     * Id of the photo
+     */
+    id: React.PropTypes.number.isRequired,
+    /**
      * Image url to display
      */
     image: React.PropTypes.string.isRequired,
@@ -45,7 +49,7 @@ class Tile extends React.Component {
       liked: like
     })
 
-    this.props.likeHandler(like);
+    this.props.likeHandler(like, this.props.id);
   }
 
   render() {
